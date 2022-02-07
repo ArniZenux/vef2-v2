@@ -1,7 +1,7 @@
 import express from 'express';
-import { catchErrors } from '../lib/catch-errors.js';
 
-import { list, insert } from '../lib/db.js';
+import { catchErrors } from '../lib/catch-errors.js';
+import { list } from '../lib/db_psql.js';
 
 export const indexRouter = express.Router();
 
@@ -16,6 +16,33 @@ async function indexRoute(req, res) {
   });
 }
 
+async function indexSlug(){
+
+}
+
+async function adminRoute(){
+
+}
+
+async function adminLogin(){
+
+}
+
+async function adminSlug(){
+
+}
+
+async function indexSlugPost(){
+
+}
+
+async function adminPost(){
+
+}
+
+async function adminSlugPost(){
+
+}
 
 /**********/
 //   GET   /
