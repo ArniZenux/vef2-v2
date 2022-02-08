@@ -2,7 +2,7 @@ import dotenv from 'dotenv';
 import express from 'express';
 import { dirname, join } from 'path';
 import { fileURLToPath } from 'url';
-import { isInvalid } from './lib/template-helpers.js';
+//import { isInvalid } from './lib/template-helpers.js';
 import { indexRouter } from './routes/index-routes.js';
 
 dotenv.config();
@@ -22,6 +22,14 @@ app.set('view engine', 'ejs');
 app.locals = {
   // TODO hjálparföll fyrir template
 };
+
+function isInvalid(field, errors = []) {
+  // Boolean skilar `true` ef gildi er truthy (eitthvað fannst)
+  // eða `false` ef gildi er falsy (ekkert fannst: null)
+  return Boolean(errors.find((i) => i && i.param === field));
+}
+
+app.locals.isInvalid = isInvalid;
 
 app.use('/', indexRouter);
 

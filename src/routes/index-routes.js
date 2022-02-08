@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { catchErrors } from '../lib/catch-errors.js';
+
 import { list } from '../lib/db_psql.js';
 
 export const indexRouter = express.Router();
@@ -8,20 +9,23 @@ export const indexRouter = express.Router();
 async function indexRoute(req, res) {
   //const events = await listEvents();
 
+  const errors = [];
+
   const events = []; 
 
-  res.render('index', {
-    title: 'Viðburðasíðan',
-    events,
-  });
+  res.render('index', {errors, title: 'Viðburðasíðan', events});
 }
 
 async function indexSlug(){
 
 }
 
-async function adminRoute(){
+async function adminRoute(req, res, next){
+  const errors = [];
 
+  const events = []; 
+
+  res.render('admin', {errors, title: 'Viðburðasíðan - Umsjón', events});
 }
 
 async function adminLogin(){
@@ -48,14 +52,14 @@ async function adminSlugPost(){
 //   GET   /
 /**********/
 indexRouter.get('/', catchErrors(indexRoute));
-indexRouter.get('/:slug', catchErrors(indexSlug));
+//indexRouter.get('/:slug', catchErrors(indexSlug));
 indexRouter.get('/admin', catchErrors(adminRoute));
-indexRouter.get('/admin/login', catchErrors(adminLogin));
-indexRouter.get('/admin/:slug', catchErrors(adminSlug));
+//indexRouter.get('/admin/login', catchErrors(adminLogin));
+//indexRouter.get('/admin/:slug', catchErrors(adminSlug));
 
 /**********/
 //  POST   /
 /**********/
-indexRouter.post('/:slug', catchErrors(indexSlugPost));
-indexRouter.post('/admin', catchErrors(adminPost));
-indexRouter.post('/admin/:slug', catchErrors(adminSlugPost));
+//indexRouter.post('/:slug', catchErrors(indexSlugPost));
+//indexRouter.post('/admin', catchErrors(adminPost));
+//indexRouter.post('/admin/:slug', catchErrors(adminSlugPost));
