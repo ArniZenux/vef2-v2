@@ -1,0 +1,42 @@
+<%- include('header') -%>
+
+<h1><%= title %></h1>
+
+<form class="form" method="post" action="/admin/slug" autocomplete="off">
+
+  <% for(let event of events ) { %>
+
+    <div class="field<%= locals.isInvalid('name', errors) ?  ' field--invalid' : '' %>">
+      <label for="name">Nafn</label>
+      <input type="text" name="name" id="name" value="<%= event.name %>" class="">
+    </div>  
+
+    <div class="field<%= locals.isInvalid('name', errors) ?  ' field--invalid' : '' %>">
+      <input type="hidden" name="slug" id="slug" value="<%= event.slug %>" class="">
+    </div>
+
+    <div class="field field--textarea<%= locals.isInvalid('comment', errors) ?  ' field--invalid' : '' %>">
+      <label for="comment">Lýsing</label>
+      <textarea name="comment"> <%= event.description %> </textarea>
+    </div>
+  
+    <% if (errors.length > 0) { %>
+      <h2 class="errors__title">Villur:</h2>
+      <ul class="errors">
+        <% errors.forEach((error) => { %>
+          <li class="error"><label for="<%= error.param %>"><%= error.msg %></label></li>
+        <% }); %>
+      </ul>
+    <% } %>
+
+  <% } %>
+
+  <button class="button button--large button--margin">Uppfæra</button>
+
+</form>
+
+<hr> 
+
+<p><a href="/">Til baka</a></p>
+
+<%- include('footer') -%>

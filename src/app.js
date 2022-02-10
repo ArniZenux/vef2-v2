@@ -24,8 +24,6 @@ app.locals = {
 };
 
 function isInvalid(field, errors = []) {
-  // Boolean skilar `true` ef gildi er truthy (eitthvað fannst)
-  // eða `false` ef gildi er falsy (ekkert fannst: null)
   return Boolean(errors.find((i) => i && i.param === field));
 }
 
