@@ -28,7 +28,7 @@
   </div>
   
   <% if (errors.length > 0) { %>
-    <h2 class="errors__title">Villur:</h2>
+    <h3 class="errors__title">Villur:</h3>
     <ul class="errors">
       <% errors.forEach((error) => { %>
         <li class="error"><label for="<%= error.param %>"><%= error.msg %></label></li>
@@ -41,9 +41,10 @@
 </form>
 
 <hr>
+
 <br>
 <p>Innskráður sem : admin </p>
 <br>
-<a href="/">útskrá</a>
+<a href="/logout">útskrá</a>
 
 <%- include('footer') -%>

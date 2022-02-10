@@ -11,7 +11,7 @@
       <input type="text" name="name" id="name" value="<%= event.name %>" class="">
     </div>  
 
-    <div class="field<%= locals.isInvalid('name', errors) ?  ' field--invalid' : '' %>">
+    <div class="field<%= locals.isInvalid('slug', errors) ?  ' field--invalid' : '' %>">
       <input type="hidden" name="slug" id="slug" value="<%= event.slug %>" class="">
     </div>
 

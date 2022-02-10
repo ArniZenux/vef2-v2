@@ -10,9 +10,13 @@
 }
 
 :root {
+  --fonts: Helvetica, Arial, sans-serif;
   --color-paperwhite: #ffe;
   --color-error: #a77;
+  --color-white: #eee;
   --color-accent: #aa6;
+  --color-accent-dark: #663;
+  --color-accent-light: #cc8;
 }
 
 html {
@@ -126,24 +130,8 @@ li{
 
 .field--invalid input,
 .field--invalid textarea {
-  border-color: var(--color-accent);
+  border-color: var(--color-error);
   background-color: #fbb;
-}
-
-.field--checkbox {
-  display: flex;
-  justify-content: center;
-  padding: 4px;
-}
-
-.field--checkbox label {
-  display: flex;
-  min-width: initial;
-}
-
-.field--checkbox input {
-  scale: 2;
-  margin-right: 1rem;
 }
 
 .button {
@@ -171,8 +159,12 @@ li{
 
 .errors__title {
   margin-top: 1rem;
+  font-size: 2rem;
 }
 
+.errors li {
+  font-size: 1.3rem;
+}
 
 .registrations {
   margin-bottom: 1rem;
