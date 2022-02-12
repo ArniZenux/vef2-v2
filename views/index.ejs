@@ -5,10 +5,10 @@
 <h2>Viðburðir á næstunni</h2>
 <ul>
 <% for(let event of events ) { %>
-	 <li> <a href="<%=event.id %>" > <%= event.name %> </a> </li>
+	 <li> <a href="<%=event.slug %>" > <%= event.name %> </a> </li>
 	 <p> <%= event.description %> </p> 
 	 <br>
-	 
+
 <% } %>
 </ul>
 

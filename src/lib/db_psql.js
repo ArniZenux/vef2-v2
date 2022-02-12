@@ -2,8 +2,6 @@ import pg from 'pg';
 
 const connectionString = 'postgres://notandi2:mypass@localhost/eventdb';
 
-//const connectionString = config.data.connection;
-
 const pool = new pg.Pool({ connectionString });
 
 pool.on('error', (err) => {
@@ -11,18 +9,21 @@ pool.on('error', (err) => {
     process.exit(-1);
 });
 
-export async function query(_query, values = []){
+export async function query(Query, values = []){
+
     const client = await pool.connect(); 
+    let result = [];
 
     try {
-        const result = await client.query(_query, values);
-				//console.log('rows :>>', result.rows); 
-        return result; 
+        const queryResult = await client.query(Query, values);
+        result = queryResult.rows;
     }catch(e) {
-        console.log('Error setting', e); 
+        console.error('Error setting', e); 
     }finally{
 		client.release(); 
 	} 
+	
+	return result; 
 }
 
 export async function list(_query, _values) {
@@ -76,4 +77,8 @@ export async function del(_query, _values){
 		success = false;
 	}
 	return success; 
+}
+
+export async function end() {
+  await pool.end();
 }
