@@ -1,6 +1,19 @@
+import dotenv from 'dotenv';
 import pg from 'pg';
 
-const connectionString = 'postgres://notandi2:mypass@localhost/eventdb';
+//const connectionString = 'postgres://notandi2:mypass@localhost/eventdb';
+
+dotenv.config();
+
+const {
+  DATABASE_URL: connectionString,
+  NODE_ENV: nodeEnv = 'development',
+} = process.env;
+
+if (!connectionString) {
+  console.error('vantar DATABASE_URL í .env');
+  process.exit(-1);
+}
 
 const pool = new pg.Pool({ connectionString });
 
@@ -9,21 +22,17 @@ pool.on('error', (err) => {
     process.exit(-1);
 });
 
-export async function query(Query, values = []){
-
+export async function query(_query, values = []){
     const client = await pool.connect(); 
-    let result = [];
-
+   
     try {
-        const queryResult = await client.query(Query, values);
-        result = queryResult.rows;
+        const result = await client.query(_query, values);
+        return result; 
     }catch(e) {
         console.error('Error setting', e); 
     }finally{
 		client.release(); 
 	} 
-	
-	return result; 
 }
 
 export async function list(_query, _values) {

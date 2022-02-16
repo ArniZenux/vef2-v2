@@ -15,7 +15,7 @@
 
 <h1>Nýr viðburður</h1>
 
-<form class="form" method="post" action="/admin">
+<form class="form" method="post" action="/admin/skraVidburdi">
 
   <div class="field<%= locals.isInvalid('name', errors) ?  ' field--invalid' : '' %>">
     <label for="name">Nafn</label>
@@ -42,8 +42,12 @@
 
 <hr>
 
+<% if( admin ) { %>
+  <p> Welcome admin! </p> 
+<% } %>
+
 <br>
-<p>Innskráður sem : admin </p>
+<p>Innskráður sem : <strong>Admin</strong></p>
 <br>
 <a href="/admin/logout">Útskrá</a></p>
 

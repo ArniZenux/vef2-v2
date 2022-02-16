@@ -1,1 +1,3 @@
--- Útfæra að "droppa" gögnum
+DROP TABLE IF EXISTS skraning;
+DROP TABLE IF EXISTS vidburdur;
+DROP TABLE IF EXISTS users;
