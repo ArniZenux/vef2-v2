@@ -69,16 +69,6 @@ async function eyda() {
   console.info('All tables dropped');
 }
 
-/*
-eyda().catch((err) => {
-  console.error('Error drop file', err);
-});
-
 create().catch((err) => {
   console.error('Error inserting schema', err);
 });
-
-insert().catch((err) => {
-  console.error('Error inserting file', err);
-});
-/*

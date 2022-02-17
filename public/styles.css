@@ -222,3 +222,13 @@ li {
 .user__loggedin {
   margin-bottom: 0.5rem;
 }
+
+@media screen and (max-width: 1000px) {
+  footer {
+    display: none;
+  }
+
+  main {
+    margin: 10px;
+  }
+}
