@@ -1,8 +1,6 @@
 import dotenv from 'dotenv';
 import pg from 'pg';
 
-//const connectionString = 'postgres://notandi2:mypass@localhost/eventdb';
-
 dotenv.config();
 
 const {
@@ -24,7 +22,7 @@ pool.on('error', (err) => {
 
 export async function query(_query, values = []){
     const client = await pool.connect(); 
-   
+    
     try {
         const result = await client.query(_query, values);
         return result; 
@@ -33,6 +31,7 @@ export async function query(_query, values = []){
     }finally{
 		client.release(); 
 	} 
+	
 }
 
 export async function list(_query, _values) {

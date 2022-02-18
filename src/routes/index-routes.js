@@ -24,7 +24,7 @@ const userMiddleware = [
 /**     
  *  GET 
  */
-async function indexRoute(req, res, next) {
+async function indexRoute(req, res) {
   const title = 'Viðburðasíðan';
   const subtitle = 'Viðburðir á næstunni';
   const sqlVidburdur = 'SELECT * FROM vidburdur';

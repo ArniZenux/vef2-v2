@@ -50,8 +50,8 @@ function isInvalid(field, errors = []) {
 
 app.locals.isInvalid = isInvalid;
 
-app.use('/', indexRouter);
 app.use('/admin', adminRouter);
+app.use('/', indexRouter);
 
 /**
  * Handler error 

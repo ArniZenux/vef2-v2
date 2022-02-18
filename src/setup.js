@@ -6,15 +6,25 @@ const insertFile = './sql/insert.sql';
 const dropfile = './sql/drop.sql';
 
 /**
- *   CREATE 
+ *   CREATE, INSERT and DROP.
  */
-async function create() {
-  let client; 
+async function makeAll() {
 
-  const data = await promises.readFile(schemaFile);
-  
+  const schemadata = await promises.readFile(schemaFile);
+  const insertdata = await promises.readFile(insertFile); 
+  const dropData = await promises.readFile(dropfile);
+    
   try {
-    const result = await query(data.toString('utf-8'));
+    const result = await query(dropData.toString('utf-8'));
+    console.info('Table dropped');
+  }
+
+  catch(e){
+    console.error('Error droping: ', e);
+  }
+
+  try {
+    const result = await query(schemadata.toString('utf-8'));
     console.info('Schema created');
   }
 
@@ -22,53 +32,19 @@ async function create() {
     console.error('Error creating: ', e);
   }
 
-  //await end();
-  
-}
-
-
-/**
- *  INSERT
- */
-async function insert() {
-  let client; 
-
-  const data = await promises.readFile(insertFile); 
-  
   try {
-    const result = await query(data.toString('utf-8'));
+    const result = await query(insertdata.toString('utf-8'));
+    console.info('Inserted file');
   }
-
   catch(e){
     console.error('Error inserting: ', e);
   }
 
   await end();
   
-  console.info('File inserted');
+  console.info('All files are inserted');
 }
 
-/**
- *   DROP 
- */
-async function eyda() {
-  let client; 
-
-  const eydaData = await promises.readFile(dropfile);
-  
-  try {
-    const result = await query(eydaData.toString('utf-8'));
-  }
-
-  catch(e){
-    console.error('Error droping: ', e);
-  }
-
-  await end();
-  
-  console.info('All tables dropped');
-}
-
-create().catch((err) => {
+makeAll().catch((err) => {
   console.error('Error inserting schema', err);
 });

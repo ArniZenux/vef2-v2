@@ -1,6 +1,14 @@
 import { describe, expect, it } from '@jest/globals';
-import { list, insert } from '../lib/db_psql.js';
+import { insert } from '../lib/db_psql.js';
 
-describe('Innsetja vidburdi', () => {
+describe('db', () => {
+	it('innsetja vidburd i dagskra', async() => {
+		const input = {
+				name : 'profa',
+				slug : 'profa_slug',
+			};
 
+			const output = await insert(input); 
+			expect(output).toBe(true); 
+	});
 });

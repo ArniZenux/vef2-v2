@@ -1,6 +1,5 @@
 import express from 'express';
 import passport from 'passport'; 
-import xss from 'xss';
 
 import { body } from 'express-validator';
 import { list, insert, update } from '../lib/db_psql.js';
@@ -53,9 +52,11 @@ async function adminIndex(req, res){
       vidburdur;
     `;
   
+  const boss = true; 
+
   const rows = await list(sqlVidburdur);
 
-  res.render('admin', {errors, message,  title, formData, events : rows });
+  res.render('admin', {errors, boss, title, formData, events : rows });
 }
 
 /**     
@@ -70,19 +71,12 @@ async function adminLogin(req, res){
   let message = '';
   const errors = [];
   
-  // Athugum hvort einhver skilaboð séu til í session, ef svo er birtum þau
-  // og hreinsum skilaboð
   if (req.session.messages && req.session.messages.length > 0) {
     message = req.session.messages.join(', ');
     req.session.messages = [];
   }
 
   return res.render('login', {validated, errors, message, title: 'Innskráning' });
-
-  // my own code. 
-  //const message = '';
-  //const errors = []; 
-  //res.render('login', {errors, message, title: 'Innskráningu stjóranda - Umsjón'});
 } 
 
 /**     
@@ -117,24 +111,20 @@ async function adminSlug(req, res){
  */
 async function adminPost(req, res){
   const title = 'Viðburðasíðan - Umsjón';
-  const notandi = [req.body.username, req.body.password];
 
   const errors = [];
   const formData = [];
-    
-  console.log(notandi[0]);
-  console.log(notandi[1]);
   
   const sqlVidburdur = `
     SELECT * FROM 
       vidburdur;
   `;
   
-  const admin = true; 
+  const boss = true; 
 
   const rows = await list(sqlVidburdur);
 
-  res.render('admin', {errors, admin,  title, formData, events : rows });
+  res.render('admin', {errors, boss,  title, formData, events : rows });
 }
 
 /**
@@ -204,8 +194,9 @@ async function adminSlugPost(req, res){
   
     const rows = await list(sqlVidburdur);
 
+    const boss = true; 
     
-    res.render('admin', {errors, title , formData, events : rows });
+    res.render('admin', {errors, boss, title , formData, events : rows });
   }
   else {
     return res.redirect('/');
@@ -217,9 +208,9 @@ async function adminSlugPost(req, res){
 /**
  *  GET  
  */
-adminRouter.get('/', catchErrors(adminIndex));
+adminRouter.get('/', ensureLoggedIn, catchErrors(adminIndex));
 adminRouter.get('/login', catchErrors(adminLogin));
-adminRouter.get('/:slug', catchErrors(adminSlug));
+adminRouter.get('/:slug',  catchErrors(adminSlug));
 
 /**
  *  POST    
@@ -245,6 +236,7 @@ adminRouter.post('/login',
 
 // Stjórnandi skrá nýja viðburði (mikið vesen að nota bara /admin/, (virkar betur á /admin/skraVidburdi))
 adminRouter.post('/skraVidburdi', 
+    ensureLoggedIn,
     vidburdMiddleware, 
     catchErrors(vidburdCheck), 
     catchErrors(adminVidburdurPost));

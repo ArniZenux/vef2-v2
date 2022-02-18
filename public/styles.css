@@ -39,8 +39,8 @@ h1,
 h2 {
   font-size: 3rem;
   font-weight: bold;
-  text-align: left;
   margin: 0;
+  text-align: left;
 }
 
 h1 {
@@ -106,11 +106,11 @@ li {
 
 .field input,
 .field textarea {
+  border: 1px solid var(--color-accent);
+  border-radius: 10px;
   flex: 1;
   padding: 8px;
-  border: 1px solid var(--color-accent);
   width: 100%;
-  border-radius: 10px;
 }
 
 .field--textarea {
@@ -129,12 +129,12 @@ li {
 }
 
 .button {
-  padding: 0.5rem;
+  background-color: var(--color-accent);
   border: 1px solid var(--color-accent);
   border-radius: 8px;
-  width: 60%;
-  background-color: var(--color-accent);
+  padding: 0.5rem;
   transition: background-color ease-in 300ms;
+  width: 60%;
 }
 
 .button--margin {
@@ -192,42 +192,7 @@ li {
   margin-bottom: 1rem;
 }
 
-.registrations__total {
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  text-align: center;
-}
-
-.registrations__empty {
-  text-align: center;
-}
-
-
-/* Paging */
-
-.paging {
-  display: flex;
-  justify-content: space-between;
-
-  margin-bottom: 1rem;
-}
-
-/* User */
-
-.user {
-  display: flex;
-  flex-direction: column;
-}
-
-.user__loggedin {
-  margin-bottom: 0.5rem;
-}
-
-@media screen and (max-width: 1000px) {
-  footer {
-    display: none;
-  }
-
+@media (max-width: 1000px) {
   main {
     margin: 10px;
   }

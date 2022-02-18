@@ -23,6 +23,3 @@ CREATE TABLE IF NOT EXISTS users (
   username character varying(64) NOT NULL,
   password character varying(256) NOT NULL
 );
-
--- Lykilorð: "123"
-INSERT INTO users (username, password) VALUES ('admin', '$2a$11$pgj3.zySyFOvIQEpD7W6Aund1Tw.BFarXxgLJxLbrzIv/4Nteisii');

@@ -15,10 +15,18 @@ export async function vidburdCheck(req, res, next) {
       vidburdur;
     `;
   
+  const boss = true; 
+
   const rows = await list(sqlVidburdur);
 
   if (!validation.isEmpty()) {
-    return  res.render('admin', {errors : validation.errors, title , formData, events : rows });
+    return  res.render('admin', 
+      { errors : validation.errors, 
+        boss, 
+        title, 
+        formData, 
+        events : rows 
+    });
   }
 
   return next();
