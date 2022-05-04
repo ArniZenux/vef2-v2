@@ -192,6 +192,15 @@ li {
   margin-bottom: 1rem;
 }
 
+footer {
+  padding-top: 1rem;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--max-width);
+  font-size: 0.9rem;
+  font-weight: 400;
+}
+
 @media (max-width: 1000px) {
   main {
     margin: 10px;
