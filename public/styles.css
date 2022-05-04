@@ -195,8 +195,8 @@ li {
 footer {
   padding-top: 1rem;
   margin: 0 auto;
+  max-width: 1000px;
   width: 100%;
-  max-width: var(--max-width);
   font-size: 0.9rem;
   font-weight: 400;
 }
